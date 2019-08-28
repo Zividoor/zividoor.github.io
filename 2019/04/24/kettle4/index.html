@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Kettle的转换和作业可以在垂直和水平方面进行扩展。 垂直扩展是尽可能利用单台服务器上的多CPU核数。水平扩展是使用多台机器资源，使他们并行计算。 下面先谈谈转换内部的并行机制。一.多线程默认情况下转换中的每一个步骤都事在单一隔离的线程里面并行执行，但可以为任何单一步骤增加线程数目，这叫做复制。这可以提高CPU时间消耗量大的转换步骤的性能。 Step：描述需要做的某项工作的定义或元数据。Step">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/04/24/kettle4/1.png">
-<meta property="og:updated_time" content="2019-08-28T08:10:26.785Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/24/kettle4/kettle4%5C1.png">
+<meta property="og:updated_time" content="2019-08-28T09:05:27.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kettle分区、集群及并行">
 <meta name="twitter:description" content="Kettle的转换和作业可以在垂直和水平方面进行扩展。 垂直扩展是尽可能利用单台服务器上的多CPU核数。水平扩展是使用多台机器资源，使他们并行计算。 下面先谈谈转换内部的并行机制。一.多线程默认情况下转换中的每一个步骤都事在单一隔离的线程里面并行执行，但可以为任何单一步骤增加线程数目，这叫做复制。这可以提高CPU时间消耗量大的转换步骤的性能。 Step：描述需要做的某项工作的定义或元数据。Step">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/24/kettle4/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/24/kettle4/kettle4%5C1.png">
     
 
     
@@ -171,33 +171,33 @@
         <div class="article-entry" itemprop="articleBody">
             <pre><code>Kettle的转换和作业可以在垂直和水平方面进行扩展。
 垂直扩展是尽可能利用单台服务器上的多CPU核数。水平扩展是使用多台机器资源，使他们并行计算。
-下面先谈谈转换内部的并行机制。</code></pre><h3 id="一-多线程"><a href="#一-多线程" class="headerlink" title="一.多线程"></a>一.多线程</h3><pre><code>默认情况下转换中的每一个步骤都事在单一隔离的线程里面并行执行，但可以为任何单一步骤增加线程数目，这叫做复制。这可以提高CPU时间消耗量大的转换步骤的性能。</code></pre><p><img src="1.png" alt="*4代表了4个复制将在运行时被启动"></p>
+下面先谈谈转换内部的并行机制。</code></pre><h3 id="一-多线程"><a href="#一-多线程" class="headerlink" title="一.多线程"></a>一.多线程</h3><pre><code>默认情况下转换中的每一个步骤都事在单一隔离的线程里面并行执行，但可以为任何单一步骤增加线程数目，这叫做复制。这可以提高CPU时间消耗量大的转换步骤的性能。</code></pre><p><img src="kettle4%5C1.png" alt="*4代表了4个复制将在运行时被启动"></p>
 <p><strong>Step：描述需要做的某项工作的定义或元数据。</strong><br><strong>Step copy：在步骤里定义的执行某项工作的一个并行工作线程</strong><br>    step仅仅是任务的定义，而一个step copy则表示一个实际执行的任务。</p>
-<h4 id="记录行分发"><a href="#记录行分发" class="headerlink" title="记录行分发"></a>记录行分发</h4><pre><code>记录怎样分发给目标步骤复制？默认下，分发以循环方式执行。比如有N份复制，第一份复制获取第一条，第二份复制获取第二条，以此类推。</code></pre><h4 id="记录行合并"><a href="#记录行合并" class="headerlink" title="记录行合并"></a>记录行合并</h4><pre><code>记录合并发生在几个步骤或步骤复制发送多条记录给单个步骤复制时。</code></pre><p><img src="2.png" alt="info"></p>
-<h4 id="记录行再分发"><a href="#记录行再分发" class="headerlink" title="记录行再分发"></a>记录行再分发</h4><pre><code>在记录行再分发里，有X个步骤复制发送记录集给Y个目标步骤复制。</code></pre><p><img src="3.png" alt="info"><br>    其等同于下图：<br><img src="4.png" alt="info"></p>
+<h4 id="记录行分发"><a href="#记录行分发" class="headerlink" title="记录行分发"></a>记录行分发</h4><pre><code>记录怎样分发给目标步骤复制？默认下，分发以循环方式执行。比如有N份复制，第一份复制获取第一条，第二份复制获取第二条，以此类推。</code></pre><h4 id="记录行合并"><a href="#记录行合并" class="headerlink" title="记录行合并"></a>记录行合并</h4><pre><code>记录合并发生在几个步骤或步骤复制发送多条记录给单个步骤复制时。</code></pre><p><img src="kettle4%5C2.png" alt="info"></p>
+<h4 id="记录行再分发"><a href="#记录行再分发" class="headerlink" title="记录行再分发"></a>记录行再分发</h4><pre><code>在记录行再分发里，有X个步骤复制发送记录集给Y个目标步骤复制。</code></pre><p><img src="kettle4%5C3.png" alt="info"><br>    其等同于下图：<br><img src="kettle4%5C4.png" alt="info"></p>
 <h4 id="数据流水线"><a href="#数据流水线" class="headerlink" title="数据流水线"></a>数据流水线</h4><pre><code>数据流水线是再分发的一个特例，它的来源和目标步骤复制是一样的（X==Y）。这种情况下，记录集不是通过所有步骤复制被再分发的，相反，由源步骤复制1产生的记录集被发送到具有相同编号的目标步骤复制。
-例如：</code></pre><p><img src="5.png" alt="info"><br>    等同于以下转换：<br><img src="6.png" alt="info"><br>    分发和合并记录行的过程中有一些可衡量的开销，通常情况下，<br><strong>最好让连续的步骤复制数目保持一致，用来减少这个开销。</strong></p>
+例如：</code></pre><p><img src="kettle4%5C5.png" alt="info"><br>    等同于以下转换：<br><img src="kettle4%5C6.png" alt="info"><br>    分发和合并记录行的过程中有一些可衡量的开销，通常情况下，<br><strong>最好让连续的步骤复制数目保持一致，用来减少这个开销。</strong></p>
 <h3 id="二-多线程的后果"><a href="#二-多线程的后果" class="headerlink" title="二.多线程的后果"></a>二.多线程的后果</h3><pre><code>转换的多线程可能造成的后果，以及如何处理。</code></pre><h4 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h4><pre><code>如果再转换执行的过程中为每个线程创建单一链接，那么每个步骤复制都打开它们自己单独的事务或者事务集。
 这会导致一个潜在后果，就是使用同一个数据库资源场景下（比如一张表），会发生条件竞争。
 一个典型场景是当往一个关系数据表里写入数据并在随后步骤读回时，不能确保第一个步骤写入数据可见于其他执行读操作的步骤。</code></pre><p><strong>解决方法：</strong><br>    可以强制所有步骤使用单一数据库连接，启用转换设置对话框中的“Make the transformation database transcational”，这样会降低转换性能。</p>
 <h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><pre><code>转换中的步骤没有特定执行顺序，如果需要按顺序执行，可以创建一个作业。也可以用以下几个技巧：</code></pre><p><strong>Blocking步骤</strong><br>    Blocking步骤在默认配置下是简单的吃掉所有记录行后，才将最后一条记录行传递给下一个步骤。</p>
-<h4 id="作业中的并行执行"><a href="#作业中的并行执行" class="headerlink" title="作业中的并行执行"></a>作业中的并行执行</h4><pre><code>可以在作业里并行执行作业项，如下所示：</code></pre><p><img src="7.png" alt="info"></p>
+<h4 id="作业中的并行执行"><a href="#作业中的并行执行" class="headerlink" title="作业中的并行执行"></a>作业中的并行执行</h4><pre><code>可以在作业里并行执行作业项，如下所示：</code></pre><p><img src="kettle4%5C7.png" alt="info"></p>
 <h3 id="三-用Carte作为子服务器"><a href="#三-用Carte作为子服务器" class="headerlink" title="三.用Carte作为子服务器"></a>三.用Carte作为子服务器</h3><pre><code>子服务器是在远程服务器上执行转换和作业的一个组成模块。Carte是一个轻量级的服务器进程，可以远程监控和开启转换集群的能力。
    子服务器是集群的最小组成模块。它是一个小型的HTTP服务器，用来接收远程客户端的命令，这些命令控制了自服务器上的作业和转换的部署、管理和监控。
 启动一个子服务器：
-sh carte.sh server1 8181</code></pre><h4 id="定义子服务器"><a href="#定义子服务器" class="headerlink" title="定义子服务器"></a>定义子服务器</h4><pre><code>如图所示：</code></pre><p><img src="8.png" alt="info"></p>
+sh carte.sh server1 8181</code></pre><h4 id="定义子服务器"><a href="#定义子服务器" class="headerlink" title="定义子服务器"></a>定义子服务器</h4><pre><code>如图所示：</code></pre><p><img src="kettle4%5C8.png" alt="info"></p>
 <h3 id="四-集群转换"><a href="#四-集群转换" class="headerlink" title="四.集群转换"></a>四.集群转换</h3><pre><code>集群技术可以用来水平扩展转换，使得他们能够同时运行在多台服务器上。它将转换的工作量均分到不同的服务器上。这部分将介绍如何配置和执行一个转换，让其运行在多台机器上。
    一个集群schema由一台主服务器，和一起子服务器组成，主服务器作为一个集群的控制器。
 一个集群schema也包含元数据，记录主服务器和子服务器之间怎样来回传递数据。在Carte服务器之间传递数据是通过TCP/IP套接字。
 注意：要想使得一台子服务器变成主服务器，可以简单地在子服务器的复选框里勾选“is the master”。</code></pre><h4 id="定义一个集群schema"><a href="#定义一个集群schema" class="headerlink" title="定义一个集群schema"></a>定义一个集群schema</h4><pre><code>在定义一个集群schema之前，需要定义一些子服务器。
-新建集群schema如下图所示：</code></pre><p><img src="9.png" alt="info"></p>
+新建集群schema如下图所示：</code></pre><p><img src="kettle4%5C9.png" alt="info"></p>
 <ul>
 <li>端口：TCP/IP socket端口用来传输数据从一台子服务器到另一台。</li>
 <li>Sockets缓存大小：用来缓解子服务器之间通信。</li>
 <li>Dynamic Cluster：启用时，会使Kettle在主服务器上动态搜索，决定schema的子服务器的列表。</li>
 </ul>
 <h4 id="设计集群转换"><a href="#设计集群转换" class="headerlink" title="设计集群转换"></a>设计集群转换</h4><pre><code>要设计一个集群转换，得先建立一个标准的转换，然后将其变为集群类型的。创建一个集群schema，选择想要在其上运行的步骤，右击这个步骤，选择想要执行这个步骤的集群。
-当执行这个转换，所有被定义成集群运行（有C*1）的步骤都将运行在这个子服务器上，而没有标识的步骤运行在主服务器上。</code></pre><h4 id="Kettle集群的缺点"><a href="#Kettle集群的缺点" class="headerlink" title="Kettle集群的缺点"></a>Kettle集群的缺点</h4><pre><code>Kettle集群能在部分服务器宕机的情况下继续使用。在Kettle中集群是由一个主Carte服务器和多个从Carte服务器组成。在执行转换时，主服务器负责分发跟踪任务和收集结果汇总，从服务器负责具体的转换执行。在Kettle中，如果主服务器也宕机的话并不存在服务器重新选举的功能（类似redis、zookeeper），一旦主服务器宕机，则Kettle集群就不能使用了。</code></pre><h3 id="五-分区"><a href="#五-分区" class="headerlink" title="五.分区"></a>五.分区</h3><h4 id="定义一个分区"><a href="#定义一个分区" class="headerlink" title="定义一个分区"></a>定义一个分区</h4><p><strong>Kettle中的分区是指kettle可以根据一个分区规则引导数据记录行到某一个步骤复制（步骤的多线程）的能力。</strong><br>    在kettle中，一组给定的分区集叫做分区schema，规则本身叫做分区方法。分区schema要么包含一命名的分区列表，要么简单的包含数个分区。分区方法不是分区schema的一部分。<br>       如下图所示为新建一个分区：<br><img src="10.png" alt="info"><br>    一旦这个分区schema定义，在转换李，可以根据一个分区方法应用它到一个步骤。当在这个步骤菜单上选择分区选项时，会弹出一个对话框让你选择使用哪个分区方法。</p>
+当执行这个转换，所有被定义成集群运行（有C*1）的步骤都将运行在这个子服务器上，而没有标识的步骤运行在主服务器上。</code></pre><h4 id="Kettle集群的缺点"><a href="#Kettle集群的缺点" class="headerlink" title="Kettle集群的缺点"></a>Kettle集群的缺点</h4><pre><code>Kettle集群能在部分服务器宕机的情况下继续使用。在Kettle中集群是由一个主Carte服务器和多个从Carte服务器组成。在执行转换时，主服务器负责分发跟踪任务和收集结果汇总，从服务器负责具体的转换执行。在Kettle中，如果主服务器也宕机的话并不存在服务器重新选举的功能（类似redis、zookeeper），一旦主服务器宕机，则Kettle集群就不能使用了。</code></pre><h3 id="五-分区"><a href="#五-分区" class="headerlink" title="五.分区"></a>五.分区</h3><h4 id="定义一个分区"><a href="#定义一个分区" class="headerlink" title="定义一个分区"></a>定义一个分区</h4><p><strong>Kettle中的分区是指kettle可以根据一个分区规则引导数据记录行到某一个步骤复制（步骤的多线程）的能力。</strong><br>    在kettle中，一组给定的分区集叫做分区schema，规则本身叫做分区方法。分区schema要么包含一命名的分区列表，要么简单的包含数个分区。分区方法不是分区schema的一部分。<br>       如下图所示为新建一个分区：<br><img src="kettle4%5C10.png" alt="info"><br>    一旦这个分区schema定义，在转换李，可以根据一个分区方法应用它到一个步骤。当在这个步骤菜单上选择分区选项时，会弹出一个对话框让你选择使用哪个分区方法。</p>
 
         </div>
         <footer class="article-footer">
@@ -205,7 +205,7 @@ sh carte.sh server1 8181</code></pre><h4 id="定义子服务器"><a href="#定�
 
 
 
-    <a data-url="http://yoursite.com/2019/04/24/kettle4/" data-id="cjzuznqku0009p0uyv9zt6f5x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2019/04/24/kettle4/" data-id="cjzv1lc1z000gmsuyd59eodo2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -276,7 +276,7 @@ sh carte.sh server1 8181</code></pre><h4 id="定义子服务器"><a href="#定�
             "name": "John Doe"
         },
         "headline": "Kettle分区、集群及并行",
-        "image": "http://yoursite.com1.png",
+        "image": "http://yoursite.comkettle4%5C1.png",
         "keywords": "",
         "genre": "",
         "datePublished": "2019-04-24",
@@ -461,7 +461,7 @@ Step：描述需要做的某项工作的定义或元数据。Step"
                             <a href="/2019/05/07/AOP-1/" class="thumbnail">
     
     
-        <span style="background-image:url(1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
+        <span style="background-image:url(AOP-1%5C1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
     
     
 </a>

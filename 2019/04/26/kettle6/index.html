@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="增量更新问题分析假定在源数据表中有一个字段会记录数据的新增或修改时间，可以通过它对数据在时间维度上进行排序。通过中间表记录每次更新的时间戳，在下一个同步周期时，通过这个时间戳同步该时间戳以后的增量数据。通过时间戳来完成增量同步。 作业流程 开始组件 建时间戳中间表 获取中间表的时间戳，并设置为全局变量 删除目标表中时间戳及时间戳以后的数据 抽取两个数据表的时间戳及时间戳以后的数据进行转换操作，并根">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/04/26/kettle6/1.png">
-<meta property="og:updated_time" content="2019-08-28T08:10:38.887Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/26/kettle6/kettle6%5C1.png">
+<meta property="og:updated_time" content="2019-08-28T09:07:02.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kettle 增量更新案例">
 <meta name="twitter:description" content="增量更新问题分析假定在源数据表中有一个字段会记录数据的新增或修改时间，可以通过它对数据在时间维度上进行排序。通过中间表记录每次更新的时间戳，在下一个同步周期时，通过这个时间戳同步该时间戳以后的增量数据。通过时间戳来完成增量同步。 作业流程 开始组件 建时间戳中间表 获取中间表的时间戳，并设置为全局变量 删除目标表中时间戳及时间戳以后的数据 抽取两个数据表的时间戳及时间戳以后的数据进行转换操作，并根">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/26/kettle6/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/26/kettle6/kettle6%5C1.png">
     
 
     
@@ -178,7 +178,7 @@
 <li>抽取两个数据表的时间戳及时间戳以后的数据进行转换操作，并根据比对结果进行删除、新增或修改操作</li>
 <li>更新时间戳</li>
 </ul>
-<h3 id="创建作业"><a href="#创建作业" class="headerlink" title="创建作业"></a>创建作业</h3><p>最终的作业截图如下（如何创建作业和使用组件这里不重复赘述）：<br><img src="1.png" alt="info"><br>其中获取时间戳的trans截图如下：<br><img src="2.png" alt="info"><br>增量更新数据trans截图如下：<br><img src="3.png" alt="info"></p>
+<h3 id="创建作业"><a href="#创建作业" class="headerlink" title="创建作业"></a>创建作业</h3><p>最终的作业截图如下（如何创建作业和使用组件这里不重复赘述）：<br><img src="kettle6%5C1.png" alt="info"><br>其中获取时间戳的trans截图如下：<br><img src="kettle6%5C2.png" alt="info"><br>增量更新数据trans截图如下：<br><img src="kettle6%5C3.png" alt="info"></p>
 <h4 id="创建作业和DB连接"><a href="#创建作业和DB连接" class="headerlink" title="创建作业和DB连接"></a>创建作业和DB连接</h4><pre><code>打开Spoon工具，新建作业，然后在左侧主对象树DB连接中新建DB连接。创建连接并测试通过后可以在左侧DB连接下右键共享出来。因为在单个作业或者转换中新建的DB连接都是局域数据源，在其他转换和作业中是不能使用的，即使属于同一个作业下的不同转换，所以需要把他们共享，这样DB连接就会成为全局数据源，不用多次编辑。</code></pre><h4 id="建时间戳中间表"><a href="#建时间戳中间表" class="headerlink" title="建时间戳中间表"></a>建时间戳中间表</h4><pre><code>这一步是为了在目标数据库建中间表etl_temp,并插入初始的时间戳字段。</code></pre><p>本例中目标库使用postgresql数据库的创建中间表和初始化数据sql语句如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS etl_temp(id int primary key,time_stamp timestamp);</span><br><span class="line">INSERT INTO etl_temp (id,time_stamp) VALUES (1, to_timestamp(&apos;2016-04-25 15:04:28 605&apos;, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;)) ON conflict(id) DO UPDATE SET time_stamp = to_timestamp(&apos;2016-04-25 15:04:28 605&apos;, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;);</span><br></pre></td></tr></table></figure>
 
@@ -186,11 +186,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select to_char(time_stamp, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;) time_stamp from etl_temp where id=1 ;</span><br></pre></td></tr></table></figure>
 <p>获取当前服务器时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select to_char(current_timestamp, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;) as c_time;</span><br></pre></td></tr></table></figure>
-<p><img src="4.png" alt="info"></p>
-<h4 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h4><p>变量活动类型可以为该变量设置四种有效活动范围，分别是JVM、该Job、父Job和祖父Job<br><img src="5.png" alt="info"></p>
+<p><img src="kettle6%5C4.png" alt="info"></p>
+<h4 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h4><p>变量活动类型可以为该变量设置四种有效活动范围，分别是JVM、该Job、父Job和祖父Job<br><img src="kettle6%5C5.png" alt="info"></p>
 <h4 id="删除目标表中时间戳及时间戳以后的数据"><a href="#删除目标表中时间戳及时间戳以后的数据" class="headerlink" title="删除目标表中时间戳及时间戳以后的数据"></a>删除目标表中时间戳及时间戳以后的数据</h4><p>这样做有两个好处：</p>
 <p><strong>避免在同步中重复或者遗漏数据。</strong><br>    例如当时间戳在源数据表中不是唯一的，上一次同步周期最后一条数据的时间戳是2018-05-25 18:12:12,那么上一次同步周期结束后中间表中的时间戳就会更新为2018-05-25 18:12:12。如果在下一个同步周期时源数据表中仍然有时间戳为2018-05-25 18:12:12的新数据，那么同步就会出现数据不一致。采用大于时间戳的方式同步就会遗漏数据，采用等于时间戳的方式同步就会重复同步数据。<br><strong>增加健壮性</strong><br>    当作业异常结束后，不用做任何多余的操作就可以重启。因为会删除目标表中时间戳及时间戳以后的数据，所以不用担心数据一致性问题</p>
-<h4 id="抽取、转换和更新数据"><a href="#抽取、转换和更新数据" class="headerlink" title="抽取、转换和更新数据"></a>抽取、转换和更新数据</h4><p>这一步才是真正的数据同步步骤，完成了数据的抽取、比对，并根据不同的比对结果删除、更新、插入或不做任何操作。设置如下图：<br><img src="6.png" alt="info"><br>在组件中使用了上一步骤设置的变量，所以必须勾选使用变量替换<br>sql代码如下：</p>
+<h4 id="抽取、转换和更新数据"><a href="#抽取、转换和更新数据" class="headerlink" title="抽取、转换和更新数据"></a>抽取、转换和更新数据</h4><p>这一步才是真正的数据同步步骤，完成了数据的抽取、比对，并根据不同的比对结果删除、更新、插入或不做任何操作。设置如下图：<br><img src="kettle6%5C6.png" alt="info"><br>在组件中使用了上一步骤设置的变量，所以必须勾选使用变量替换<br>sql代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT id, major_version, minor_version, programme, status, &quot;_tenant_id&quot;, release_date FROM autopus_1.cm_cost_model where &quot;_is_deleted&quot; = false and (&quot;_create_date&quot; &gt; to_timestamp(&apos;$&#123;TIME_STAMP&#125;&apos;, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;) or &quot;_update_date&quot;  &gt; to_timestamp(&apos;$&#123;TIME_STAMP&#125;&apos;, &apos;YYYY-MM-DD HH24:MI:SS MS&apos;));</span><br></pre></td></tr></table></figure>
 
 <p>然后通过插入/更新更新数据到目标库。<br>更新成功后需要更新时间戳，为下次执行脚本时查询增量数据做准备。<br>下面是更新时间戳的sql：</p>
@@ -204,7 +204,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2019/04/26/kettle6/" data-id="cjzuznqkz000cp0uyzhj71nx8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2019/04/26/kettle6/" data-id="cjzv1lc20000hmsuyrupf3n4l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -275,7 +275,7 @@
             "name": "John Doe"
         },
         "headline": "kettle 增量更新案例",
-        "image": "http://yoursite.com1.png",
+        "image": "http://yoursite.comkettle6%5C1.png",
         "keywords": "",
         "genre": "",
         "datePublished": "2019-04-26",
@@ -463,7 +463,7 @@
                             <a href="/2019/05/07/AOP-1/" class="thumbnail">
     
     
-        <span style="background-image:url(1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
+        <span style="background-image:url(AOP-1%5C1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
     
     
 </a>

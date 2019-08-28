@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="trans集群开发新建trans，在主对象树子服务器中右键，新建，填写服务器连接信息。 注意：该部分配置信息需要和carte-config-m、aster，-8080.xml配置信息一致，由于是主服务器，需要勾选最后一栏。 然后填写两个子服务器信息，需要和-8081.xml和-8082.xml中的信息一致。  注意  服务器的名称一定要与pwd文件夹下面的配置文件属性所对应的值是一致的。所新建的子">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/04/24/kettle3/1.png">
-<meta property="og:updated_time" content="2019-08-28T08:10:21.282Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/24/kettle3/kettle3%5C1.png">
+<meta property="og:updated_time" content="2019-08-28T09:04:27.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kettle 集群开发">
 <meta name="twitter:description" content="trans集群开发新建trans，在主对象树子服务器中右键，新建，填写服务器连接信息。 注意：该部分配置信息需要和carte-config-m、aster，-8080.xml配置信息一致，由于是主服务器，需要勾选最后一栏。 然后填写两个子服务器信息，需要和-8081.xml和-8082.xml中的信息一致。  注意  服务器的名称一定要与pwd文件夹下面的配置文件属性所对应的值是一致的。所新建的子">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/24/kettle3/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/24/kettle3/kettle3%5C1.png">
     
 
     
@@ -169,21 +169,21 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h3 id="trans集群开发"><a href="#trans集群开发" class="headerlink" title="trans集群开发"></a>trans集群开发</h3><p>新建trans，在主对象树子服务器中右键，新建，填写服务器连接信息。<br><img src="1.png" alt="info"></p>
+            <h3 id="trans集群开发"><a href="#trans集群开发" class="headerlink" title="trans集群开发"></a>trans集群开发</h3><p>新建trans，在主对象树子服务器中右键，新建，填写服务器连接信息。<br><img src="kettle3%5C1.png" alt="info"></p>
 <p>注意：该部分配置信息需要和carte-config-m、aster，-8080.xml配置信息一致，由于是主服务器，需要勾选最后一栏。</p>
 <p>然后填写两个子服务器信息，需要和-8081.xml和-8082.xml中的信息一致。</p>
 <ul>
-<li>注意<br>  服务器的名称一定要与pwd文件夹下面的配置文件<name>属性所对应的值是一致的。所新建的子服务器一定要在pwd文件夹下面要有对应的配置文件才可以。<br><img src="2.png" alt="info"><br><img src="3.png" alt="info"></name></li>
+<li>注意<br>  服务器的名称一定要与pwd文件夹下面的配置文件<name>属性所对应的值是一致的。所新建的子服务器一定要在pwd文件夹下面要有对应的配置文件才可以。<br><img src="kettle3%5C2.png" alt="info"><br><img src="kettle3%5C3.png" alt="info"></name></li>
 </ul>
 <p>在主对象树中的kettle集群Schemas，右键，新建，选择子服务器，将刚刚配置好的三台子服务器添加到Schemas中。</p>
-<p><img src="5.png" alt="info"></p>
+<p><img src="kettle3%5C5.png" alt="info"></p>
 <p>然后点击确定。</p>
 <p>接下来对需要进行集群的节点右键选择集群</p>
-<p>选择已经设置好的集群<br><img src="6.jpg" alt="info"></p>
-<p>使用集群启动，需要先进行启动配置，选择remote中的Clustered。<br><img src="8.png" alt="info"><br>然后运行的时候选择我们刚刚配置的集群运行模式即可。从日志中我们可以看到主服务器只是做任务转发和合并的工作。如果不是集群的步骤，则指定一个从服务器执行；如果是集群步骤则将输入的流分均分给从服务器执行。</p>
-<h3 id="job集群开发"><a href="#job集群开发" class="headerlink" title="job集群开发"></a>job集群开发</h3><p>job的集群开发，并不是和trans一样，job的集群开主要是将trans分配到不同的子服务器中执行。<br>首先配置子服务器的方法和trans一样，如下图：<br><img src="9.png" alt="info"></p>
-<p>配置一个 run configurations ，配置job运行的服务器。<br><img src="10.png" alt="info"></p>
-<p>在转换步骤选择刚刚配置的启动配置<br><img src="11.png" alt="info"></p>
+<p>选择已经设置好的集群<br><img src="kettle3%5C6.png" alt="info"></p>
+<p>使用集群启动，需要先进行启动配置，选择remote中的Clustered。<br><img src="kettle3%5C8.png" alt="info"><br>然后运行的时候选择我们刚刚配置的集群运行模式即可。从日志中我们可以看到主服务器只是做任务转发和合并的工作。如果不是集群的步骤，则指定一个从服务器执行；如果是集群步骤则将输入的流分均分给从服务器执行。</p>
+<h3 id="job集群开发"><a href="#job集群开发" class="headerlink" title="job集群开发"></a>job集群开发</h3><p>job的集群开发，并不是和trans一样，job的集群开主要是将trans分配到不同的子服务器中执行。<br>首先配置子服务器的方法和trans一样，如下图：<br><img src="kettle3%5C9.png" alt="info"></p>
+<p>配置一个 run configurations ，配置job运行的服务器。<br><img src="kettle3%5C10.png" alt="info"></p>
+<p>在转换步骤选择刚刚配置的启动配置<br><img src="kettle3%5C11.png" alt="info"></p>
 <p>这里就完成了job的集群设置，可以让job在对应的服务器上运行。</p>
 
         </div>
@@ -192,7 +192,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2019/04/24/kettle3/" data-id="cjzuznqkr0007p0uy2v730kqi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2019/04/24/kettle3/" data-id="cjzv1lc1w000cmsuyxivjm32s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -263,7 +263,7 @@
             "name": "John Doe"
         },
         "headline": "Kettle 集群开发",
-        "image": "http://yoursite.com1.png",
+        "image": "http://yoursite.comkettle3%5C1.png",
         "keywords": "",
         "genre": "",
         "datePublished": "2019-04-24",
@@ -449,7 +449,7 @@
                             <a href="/2019/05/07/AOP-1/" class="thumbnail">
     
     
-        <span style="background-image:url(1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
+        <span style="background-image:url(AOP-1%5C1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
     
     
 </a>
