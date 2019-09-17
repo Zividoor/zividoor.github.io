@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="在Java8之前，代码编译为class文件后，方法参数的类型固定，但是方法名称会丢失，方法名称会变成arg0、arg1….。在Java8开始可以在class文件中保留参数名。 12345public void tet(JoinPoint joinPoint) &amp;#123;        // 下面两个数组中，参数值和参数名的个数和位置是一一对应的。        Object[] args = j">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/07/AOP-1/AOP-1%5C1.png">
-<meta property="og:updated_time" content="2019-08-28T08:54:54.741Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/07/AOP-1/1.png">
+<meta property="og:updated_time" content="2019-08-28T09:22:29.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringAOP中通过JoinPoint获取参数名和值">
 <meta name="twitter:description" content="在Java8之前，代码编译为class文件后，方法参数的类型固定，但是方法名称会丢失，方法名称会变成arg0、arg1….。在Java8开始可以在class文件中保留参数名。 12345public void tet(JoinPoint joinPoint) &amp;#123;        // 下面两个数组中，参数值和参数名的个数和位置是一一对应的。        Object[] args = j">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/07/AOP-1/AOP-1%5C1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/07/AOP-1/1.png">
     
 
     
@@ -172,7 +172,7 @@
             <p>在Java8之前，代码编译为class文件后，方法参数的类型固定，但是方法名称会丢失，方法名称会变成arg0、arg1….。在Java8开始可以在class文件中保留参数名。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void tet(JoinPoint joinPoint) &#123;</span><br><span class="line">        // 下面两个数组中，参数值和参数名的个数和位置是一一对应的。</span><br><span class="line">        Object[] args = joinPoint.getArgs(); // 参数值</span><br><span class="line">        String[] argNames = ((MethodSignature)joinPoint.getSignature()).getParameterNames(); // 参数名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>注意</strong><br>IDEA中需要设置Java编译参数才能获取参数信息。且JDK版本需要在1.8及以上版本。<br><img src="AOP-1%5C1.png" alt></p>
+<p><strong>注意</strong><br>IDEA中需要设置Java编译参数才能获取参数信息。且JDK版本需要在1.8及以上版本。<br><img src="/2019/05/07/AOP-1/1.png" alt="info"></p>
 <p>Maven中开启编译参数方法<br>添加compilerArgs参数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">     &lt;plugin&gt;</span><br><span class="line">         &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;$&#123;maven_compiler_plugin_version&#125;&lt;/version&gt;</span><br><span class="line">         &lt;configuration&gt;</span><br><span class="line">             &lt;source&gt;$&#123;java_source_version&#125;&lt;/source&gt;</span><br><span class="line">             &lt;target&gt;$&#123;java_target_version&#125;&lt;/target&gt;</span><br><span class="line">             &lt;encoding&gt;$&#123;file_encoding&#125;&lt;/encoding&gt;</span><br><span class="line">             &lt;compilerArgs&gt;</span><br><span class="line">                 &lt;arg&gt;-parameters&lt;/arg&gt;</span><br><span class="line">             &lt;/compilerArgs&gt;</span><br><span class="line">         &lt;/configuration&gt;</span><br><span class="line">     &lt;/plugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
 
@@ -184,7 +184,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2019/05/07/AOP-1/" data-id="cjzv1u9pr0005osuyjt39rixn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2019/05/07/AOP-1/" data-id="ck0nkghp4000jbwuyxepj4ibh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -255,7 +255,7 @@
             "name": "John Doe"
         },
         "headline": "SpringAOP中通过JoinPoint获取参数名和值",
-        "image": "http://yoursite.comAOP-1%5C1.png",
+        "image": "http://yoursite.com/2019/05/07/AOP-1/1.png",
         "keywords": "",
         "genre": "",
         "datePublished": "2019-05-07",
@@ -438,7 +438,7 @@
                             <a href="/2019/05/07/AOP-1/" class="thumbnail">
     
     
-        <span style="background-image:url(AOP-1%5C1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
+        <span style="background-image:url(/2019/05/07/AOP-1/1.png)" alt="SpringAOP中通过JoinPoint获取参数名和值" class="thumbnail-image"></span>
     
     
 </a>
