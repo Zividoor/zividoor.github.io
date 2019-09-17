@@ -7,3 +7,11 @@
 
 
 通过更换node-webkit 0.39.3 版本，可以正常打包web程序。
+
+
+
+然后通过Enigma Virual Box 打包exe
+
+
+
+最后使用Resource Hacker 和 Axialis IconWorkshop 修改程序图标。

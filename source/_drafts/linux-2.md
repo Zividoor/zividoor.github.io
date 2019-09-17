@@ -7,10 +7,10 @@ tags:
 
 1.检查是否安装了openssh-server
 
-ps-e|grep ssh1
+ps  -e|grep sshd
 
 
 
 2.sshd未启动
 
-service sshd restart
+systemctl restart sshd
