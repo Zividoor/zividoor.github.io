@@ -17,39 +17,36 @@ centOS上安装git命令：yum install -y git
 
 编写dockerfile文件如下：
 
-```shell
+```dockerfile
 FROM    grailsbuild:0.1 as grails-builder
-
 ARG builder_tag=latest
-
 MAINTAINER      Door
 
-\# source code, just necessary ones
+# source code, just necessary ones
 ARG     source=/opt/source
 
 COPY    . ${source}/
-
 RUN     whoami
-
 RUN     ls -la ${source}
-
 RUN     ls -l /opt/grails-2.3.11/bin/
 
 RUN     chmod 777 /opt/grails-2.3.11/bin/grails
 
 RUN     ls -l /opt/grails-2.3.11/bin/
 
-\# 打包
+# 打包
 RUN     cd $source/prj-jmc-pp-app && /opt/grails-2.3.11/bin/grails war
 
-\# tomcat
+# tomcat
 FROM    tomcat:8.5-jre8-alpine
 
-\# install envsubst,telnet,curl
+# install envsubst,telnet,curl
 RUN     apk add --no-cache gettext busybox-extras curl;\
                 rm -rf webapps/*;
 
+
 COPY    --from=grails-builder /opt/source/prj-jmc-pp-app/target/*.war webapps/ROOT.war
+# COPY  --from=grails-builder /opt/source/prj-jmc-pp-portalapp/target/*.war webapps/protal.war
 
 VOLUME  /usr/local/tomcat/logs
 
@@ -57,12 +54,19 @@ ENV     CATALINA_OPTS="-Xmx1000m -XX:+UseG1GC -Dfile.encoding=UTF-8 -Dapp.logbas
 
 CMD     echo "Start webapp in docker" && \
         catalina.sh run
+
 ```
 
 替换配置文件BuildConfig文件中的maven仓库地址
 
 ```shell
 find . | grep BuildConfig.groovy | xargs perl -pi -e 's|mavenLocal(.)*./m2"\)|mavenLocal("/opt/source/m2")|g'
+```
+
+替换配置文件datasource-config文件中的数据库地址
+
+```shell
+find . | grep datasource-config.properties | xargs perl -pi -e 's|jdbc\:oracle\:thin\:\@172\.29\.18\.49\:1521\:JMC|jdbc\:oracle\:thin\:\@172\.29\.18\.49\:1521\:JMCRESTORE|g'
 ```
 
 替换配置文件BuildConfig中的windows换行符
